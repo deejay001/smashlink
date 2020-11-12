@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    {% if cate %}
+        <style>
+			.blog_banner .banner_inner .overlay {
+      			background: url({{ cate.header.url }}) no-repeat scroll center center;
+      			height: 500px;
+      		}
+		</style>
+    {% else %}
+        <style>
+			.blog_banner .banner_inner .overlay {
+      			background: url(static/img/banner/trip.JPG) no-repeat scroll center center;
+      			height: 500px;
+      		}
+		</style>
+
+    {% endif %}
+
+
+<!--================Home Banner Area =================-->
+        <section class=" blog_banner">
+            {% if cate %}
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background="{{ cate.header.url }}"></div>
+				<div class="container">
+					<div class="blog_b_text text-center">
+                        <h2>{{ cate.name }}</h2>
+						<a class="white_bg_btn" href="#">View More</a>
+					</div>
+				</div>
+            </div>
+            {% else %}
+
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="blog_b_text text-center">
+						<h2>Join me</h2>
+						<p>As i take you on a trip to....</p>
+						<a class="white_bg_btn" href="#">View More</a>
+					</div>
+				</div>
+            </div>
+
+            {% endif %}
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Blog Categorie Area =================-->
+        <section class="blog_categorie_area">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
+        </section>
+        <!--================Blog Categorie Area =================-->
+
+        <!--================Blog Area =================-->
+        <section class="blog_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="blog_left_sidebar">
+                            {% for post in posts1 %}
+                            <article class="row blog_item">
+                                <div class="col-md-9">
+                                    <div class="blog_post">
+                                        <img src="{{ post.image.url }}" alt="">
+                                        <div class="blog_info">
+                                            <div class="blog_meta">
+                                                <a class="active" href="#">{{ post.category }}</a>
+                                                <a href="#"><i class="lnr lnr-user"></i> {{ post.author }} </a>
+                                                <a href="#"><i class="lnr lnr-calendar-full"></i> {{ post.created_on|date:"b d, y" }} </a>
+                                                <a href="{% url 'detail' post.title %}"><i class="lnr lnr-bubble"></i> {{ post.comments.count }} Comments</a>
+                                            </div>
+                                        </div>
+                                        <div class="blog_details">
+                                            <a href="{% url 'detail' post.title %}"><h2>{{ post.title }}</h2></a>
+                                            <p>{{ post.content|slice:"200" }}.</p>
+                                            <a href="{% url 'detail' post.title %}" class="blog_btn">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+
+
+                            {% if posts1.has_other_pages %}
+                            <nav class="blog-pagination justify-content-center d-flex">
+		                        <ul class="pagination">
+                                    {% if posts1.has_previous %}
+		                            <li class="page-item">
+		                                <a href="?page={{ posts1.previous_page_number }}" class="page-link" aria-label="Previous">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-left">Prev</span>
+		                                    </span>
+		                                </a>
+		                            </li>
+                                    {% endif %}
+
+                                    {% if posts1.has_next %}
+		                            <li class="page-item">
+		                                <a href="?page={{ posts1.next_page_number }}" class="page-link" aria-label="Next">
+		                                    <span aria-hidden="true">Next
+		                                        <span class="lnr lnr-chevron-right"></span>
+		                                    </span>
+		                                </a>
+		                            </li>
+                                    {% endif %}
+		                        </ul>
+		                    </nav>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+
+
+
+{% endblock %}

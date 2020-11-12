@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+
+/venv
+__pycache__
+db.sqlite3          # not needed if you're using Postgres locally
+

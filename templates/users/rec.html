@@ -1,0 +1,29 @@
+{% load static %}
+{% block rec %}
+
+
+<div class="col-lg-7">
+						<div class="rec_title">
+        				<h2>Recent Posts</h2>
+        				</div>
+                        <div class="testi_inner p_rec">
+					        <div class="testi_slider owl-carousel">
+							{% for rec in posts %}
+						        <div class="item">
+							        <div class="testi_item">
+										<img src="{{ rec.image.url }}" class="pb-3">
+										<h4>{{ rec.title }}</h4>
+								        <a href="#"><i class="fa fa-star"></i></a>
+								        <a href="#"><i class="fa fa-star"></i></a>
+								        <a href="#"><i class="fa fa-star"></i></a>
+								        <a href="#"><i class="fa fa-star"></i></a>
+								        <a href="#"><i class="fa fa-star-half-o"></i></a>
+							        </div>
+						        </div>
+							{% endfor %}
+					        </div>
+                        </div>
+                    </div>
+
+
+{% endblock %}

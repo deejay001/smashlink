@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+ <!--================Home Banner Area =================-->
+        <section class="home_banner_area">
+            <div class="banner_inner">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="home_left_img">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="banner_content">
+
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Welcome Area =================-->
+
+        <!--================Projects Area =================-->
+        <section class="projects_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+					<h2>Welcome to Smash Link</h2>
+					<p>Stay with to enjoy trending and breaking news</p>
+				</div>
+				<div class="projects_inner row">
+					{% for cat in cat %}
+					<div class="col-lg-4 col-sm-6 brand web">
+						<div class="projects_item">
+							<a href="{% url 'cat' cat.name %}">
+								<img class="img-fluid" src="{{ cat.photo.url }}" alt="">
+							</a>
+							<div class="projects_text">
+								<a href="{% url 'cat' cat.name %}"><h4>{{ cat.name }}</h4></a>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+        	</div>
+        </section>
+        <!--================End Projects Area =================-->
+
+
+        <!--================Latest Blog Area =================-->
+        <section class="latest_blog_area p_120">
+        	<div class="container">
+        		<div class="main_title">
+        			<h2>Latest Posts from Blog</h2>
+        			<p></p>
+        		</div>
+        		<div class="row latest_blog_inner">
+					{% for rec in recent %}
+        			<div class="col-lg-4">
+        				<div class="l_blog_item">
+        					<div class="l_blog_img">
+        						<img class="img-fluid" src="{{ rec.image.url }}" alt="">
+        					</div>
+        					<div class="l_blog_text">
+        						<div class="date">
+        							<a href="#">{{ rec.created_on|date:"b d, y" }}  |  By {{ rec.author }}</a>
+        						</div>
+        						<a href="{% url 'detail' rec.title %}"><h4>{{ rec.title }}</h4></a>
+        						<p>{{ rec.content|slice:"200" }}</p>
+        					</div>
+        				</div>
+        			</div>
+        			{% endfor %}
+        		</div>
+        	</div>
+        </section>
+        <!--================End Latest Blog Area =================-->
+
+
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+						<h2>{{ post.title }}</h2>
+					</div>
+				</div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Blog Area =================-->
+        <section class="blog_area single-post-area p_120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 posts-list">
+                        <div class="single-post row">
+                            <div class="col-lg-12">
+                                <div class="feature-img">
+                                    <img class="img-fluid" src="{{ post.photo.url }}" alt="">
+                                </div>
+                                <div class="blog_info">
+                                    <div class="blog_meta">
+                                        <a href="#"><i class="lnr lnr-user"></i> {{ post.author }} </a>
+                                        <a href="#"><i class="lnr lnr-calendar-full"></i> {{ post.created_on|date:"b d, y" }} </a>
+                                        <a href="#"><i class="lnr lnr-bubble"></i> {{ post.comments.count }} Comments</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-12 mt-25">
+                                        <p>
+                                            {{ post.content }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comments-area">
+                            <h4>{{ post.comments.count }} Comments</h4>
+                            {% for com in coms %}
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="img/blog/c1.jpg" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <h5><a href="#">{{ com.name }}</a></h5>
+                                            <p class="date">{{ com.created_on }}</p>
+                                            <p class="comment">
+                                                {{ com.body }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="comment-form">
+                            <h4>Leave a Comment</h4>
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control mb-10" rows="5" name="body" placeholder="Comment" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comment'" required=""></textarea>
+                                </div>
+                                <button type="submit" class="primary-btn submit_btn">Post Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% block sidebar %} {% include 'blog/sidebar.html' %} {% endblock sidebar %}
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+
+
+
+{% endblock %}

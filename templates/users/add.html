@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container p_120">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="comment-form">
+                <h4>Leave a Reply</h4>
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <div class="form-group form-inline">
+                        <div class="form-group col-lg-6 col-md-6 name">
+                            <input type="text" name="title" class="form-control" id="title" placeholder="Title" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Title'">
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 name">
+                            {{ form.category }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="" name="photo" placeholder="Photo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Photo'">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control mb-10" rows="5" name="content" placeholder="Content" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Content'" required=""></textarea>
+                    </div>
+                    <button type="submit" class="primary-btn submit_btn">Post Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

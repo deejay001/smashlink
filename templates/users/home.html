@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        <!--================Blog Categorie Area =================-->
+        <section class="blog_categorie_area">
+            <div class="container">
+                <div class="row">
+
+                </div>
+            </div>
+        </section>
+        <!--================Blog Categorie Area =================-->
+
+        <!--================Blog Area =================-->
+        <section class="blog_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="blog_left_sidebar">
+                            {% for post in posts %}
+                            <article class="row blog_item">
+                                <div class="col-md-9">
+                                    <div class="blog_post">
+                                        <a href="{% url 'udetail' post.title %}"><h3 style="color: black">{{ post.title }}</h3></a>
+                                        <img src="{{ post.photo.url }}" alt="">
+                                        <div class="blog_info">
+                                            <div class="blog_meta">
+                                                <a href="#"><i class="lnr lnr-user"></i> {{ post.author }} </a>
+                                                <a href="#"><i class="lnr lnr-calendar-full"></i> {{ post.created_on|date:"b d, y" }} </a>
+                                                <a href="#"><i class="lnr lnr-bubble"></i> {{ post.comments.count }} Comments</a>
+                                            </div>
+                                        </div>
+                                        <div class="blog_details">
+                                            <p>{{ post.content|slice:"100" }}.</p>
+                                            <a href="{% url 'udetail' post.title %}" class="blog_btn">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+                            <nav class="blog-pagination justify-content-center d-flex">
+		                        <ul class="pagination">
+		                            <li class="page-item">
+		                                <a href="#" class="page-link" aria-label="Previous">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-left"></span>
+		                                    </span>
+		                                </a>
+		                            </li>
+		                            <li class="page-item"><a href="#" class="page-link">01</a></li>
+		                            <li class="page-item active"><a href="#" class="page-link">02</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">03</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">04</a></li>
+		                            <li class="page-item"><a href="#" class="page-link">09</a></li>
+		                            <li class="page-item">
+		                                <a href="#" class="page-link" aria-label="Next">
+		                                    <span aria-hidden="true">
+		                                        <span class="lnr lnr-chevron-right"></span>
+		                                    </span>
+		                                </a>
+		                            </li>
+		                        </ul>
+		                    </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+
+
+
+{% endblock %}
